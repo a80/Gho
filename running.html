@@ -29,23 +29,23 @@ $(document).ready(function() {
   });
 
 
-	//init function to draw rectangle
-	function init() {
-		var canvas = document.getElementById("canvas");
-		var context = canvas.getContext("2d");
-		context.fillStyle="red";
-		context.beginPath();
-		context.moveTo(100,410);
-		context.lineTo(1000,10);
-		context.lineTo(800,410);
-		context.closePath();
-		context.fill();
+	// //init function to draw rectangle
+	// function init() {
+	// 	var canvas = document.getElementById("canvas");
+	// 	var context = canvas.getContext("2d");
+	// 	context.fillStyle="red";
+	// 	context.beginPath();
+	// 	context.moveTo(100,410);
+	// 	context.lineTo(1000,10);
+	// 	context.lineTo(800,410);
+	// 	context.closePath();
+	// 	context.fill();
 
-    //drawing a smaller triangle
+ //    //drawing a smaller triangle
 
-	}
+	// }
 
-	onload=init;
+	//onload=init;
 
 	//access gyroscope data 
 	if(window.DeviceMotionEvent){
@@ -118,6 +118,35 @@ $(document).ready(function() {
     $('.carousel').show(); 
 
     //control listener 
+
+    $(window).on("go", function(e) {
+      document.getElementById("pauseLabel1").style.display = "none";  
+          document.getElementById("pauseLabel2").style.display = "none";  
+          document.getElementById("pauseLabel3").style.display = "none";  
+          document.getElementById("pauseLabel4").style.display = "none";  
+          document.getElementById("pauseLabel5").style.display = "none";  
+          document.getElementById("arrow2").style.display = "inline";  
+
+
+    }); 
+
+    $(window).on("pause", function(e) {
+          console.log("in pause event");
+          console.log("go to pause page");
+          //location.href="pause.html";
+          document.getElementById("arrow2").style.display = "none";  
+          document.getElementById("pauseLabel1").style.display = "block";  
+          document.getElementById("pauseLabel2").style.display = "block";  
+          document.getElementById("pauseLabel3").style.display = "block";  
+          document.getElementById("pauseLabel4").style.display = "block";  
+          document.getElementById("pauseLabel5").style.display = "block";  
+    }); 
+
+    $(window).on("stop", function(e) {
+          console.log("in pause event");
+          console.log("go to pause page");
+          location.href="stop.html?type=save&run=0";
+    }); 
 
     
 
@@ -196,6 +225,12 @@ $(document).ready(function() {
         <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
 </div>
+
+  <h1 id = "pauseLabel1">27:46:11</h1>
+  <h1 id = "pauseLabel2">01:03:11</h1>
+  <h1 id = "pauseLabel3">+00:48:00</h1>
+  <h1 id = "pauseLabel4">5.1 mi</h1>
+  <h1 id = "pauseLabel5">2.5 mi</h1> 
   
 
   <div id = "content">
@@ -204,12 +239,7 @@ $(document).ready(function() {
   </div>
 	</body>
 
-  <!-- pause screen components --> 
-  <h1 id = "pauseLabel1">27:46:11</h1>
-  <h1 id = "pauseLabel2">01:03:11</h1>
-  <h1 id = "pauseLabel3">+00:48:00</h1>
-  <h1 id = "pauseLabel4">5.1 mi</h1>
-  <h1 id = "pauseLabel5">2.5 mi</h1> 
+
 
 
  
