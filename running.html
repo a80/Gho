@@ -60,6 +60,8 @@ $(document).ready(function() {
   			if ((alpha > 10 && alpha <= 100) && (beta > -80 && beta <= -50)) {
           document.getElementById("carousel").style.visibility = "hidden"; 
           document.getElementById("carousel2").style.visibility = "hidden"; 
+          document.getElementById("content").style.visibility = "hidden"; 
+
 
           //document.getElementById("timeHeading").innerHTML = ""; 
           //document.getElementById("distanceFooter").innerHTML = ""; 
@@ -74,6 +76,7 @@ $(document).ready(function() {
   			} else if ((alpha > 0 && alpha <= 60) && (beta > -60 && beta <= -20)) {
           document.getElementById("carousel").style.visibility = "visible"; 
           document.getElementById("carousel2").style.visibility = "visible"; 
+          document.getElementById("content").style.visibility = "hidden"; 
           //document.getElementById("timeHeading").innerHTML = "Intermediate"; 
   				//document.body.innerHTML = "<h2>intermediate</h2><h2 id = 'accData'></h2>"; 
   				//document.body.innerHTML = "<h1>running, transition orientation</h1>"; 
@@ -102,6 +105,8 @@ $(document).ready(function() {
       pause: true,
       interval: false
     });
+
+    $('.carousel').show(); 
 
 </script>
 
@@ -174,7 +179,9 @@ $(document).ready(function() {
         <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
 </div>
-     <div id = "content">
+  
+
+  <div id = "content">
     <canvas id="scrollBG" width = "200" height = "75"></canvas>
     <canvas id="scrollFG" width = "200" height = "75"></canvas>
   </div>

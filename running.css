@@ -29,6 +29,7 @@ canvas {
     height: 300px;
     margin-bottom: 60px;
     /*display: none;*/
+    visibility: hidden;
 }
 
 .carousel .item {
