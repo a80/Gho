@@ -52,8 +52,7 @@ var drawScrollBar = function(width, height, radius){
     var ctx = canvas.getContext('2d');
 
     ctx.fillStyle = "#DDDDDD";
-    ctx.clearRect(0,0,width, height);  
-    ctx.strokeRect(0,0,width, height);  
+    ctx.clearRect(0,0,width, height);   
     //ctx.fillRect(0,0, scroll.width(), scroll.height());
    	//Draw curved arc.
    	ctx.beginPath();
