@@ -95,6 +95,17 @@ if($.getHashVar('split') != null){
 }
 
 });
+$("#distance").on('click', function(evt) {
+	evt.preventDefault(); 
+}); 
+
+$("#pace").on('click', function(evt) {
+	evt.preventDefault(); 
+}); 
+
+$("#split").on('click', function(evt) {
+	evt.preventDefault(); 
+}); 
 
 $("#nodistancebtn").on('click', function(){
 	$("#nodistancebtn").addClass("buttonselect");
