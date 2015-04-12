@@ -68,7 +68,7 @@ if($.getHashVar('split') != null){
 } else if ($.getHashVar('dist') != null){
 	location.hash="";
 } else {
-	location.href="index.html"
+	location.href="../index.html"
 }
 
 });
