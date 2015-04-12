@@ -4,8 +4,8 @@
  * Sets up the scroll bar and thumb.
  */
 var setup = function(){
-	var B = drawScrollBar(600, 300, 20);
-	setUpThumb(B,30);
+	var B = drawScrollBar(600, 300, 40);
+	setUpThumb(B,50);
 }
 
 /**
