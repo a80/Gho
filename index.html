@@ -36,13 +36,23 @@
       }
 
       .buttonspacer {
-        margin-top: 10%;
+        margin-top: 10%
+
+      }
+
+      #pastButton {
+        margin-bottom: 50px;
       }
 
       body {
         background-image: url("running.jpg");
-        background-size: 100% auto;
+        background-size: 100%;
         min-height: 100%;
+
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
       }
 
     </style>
@@ -63,7 +73,7 @@
 
       <div class="row buttonspacer">
         <div class="col-xs-10 col-xs-offset-1">
-          <button type="button" class="btn btn-lg btn-block" onclick="location.href='review.html'">View Past Runs</button>
+          <button type="button" class="btn btn-lg btn-block" onclick="location.href='review.html'" id = "pastButton">View Past Runs</button>
         </div>
       </div>
     </div>
