@@ -8,7 +8,7 @@ canvas {
 }
 
 #timeHeading, #distanceFooter {
-	font-size: 20em;
+	font-size: 15em;
 	text-align: center;
 }
 
@@ -26,12 +26,20 @@ canvas {
 }*/
 
 .carousel {
-    height: 500px;
+    height: 300px;
     margin-bottom: 60px;
 }
 
- .carousel .item {
+.carousel .item {
     width: 100%;
-    height: 500px;
+    height: 300px;
     background-color: white;
 };
+
+.carousel-control { 
+	background-color: white; 
+}
+
+.glyphicon-chevron-left, .glyphicon-chevron-right {
+	color: black;
+}
