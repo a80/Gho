@@ -7,11 +7,19 @@ canvas {
 	text-align: center;
 }
 
+#timeHeading {
+	font-size: 20em;
+}
+
 /*media queries*/ 
 @media only screen and (max-device-width: 667px) {
 	h1 {
 		font-size: 15em;
 		text-align: center;
+	}
+
+	#timeHeading {
+		font-size: 20em;
 	}
 
 	/*#accData {
