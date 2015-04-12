@@ -58,7 +58,10 @@ $(document).ready(function() {
         //values for 
 
   			if ((alpha > 10 && alpha <= 100) && (beta > -80 && beta <= -50)) {
-          document.getElementById("timeHeading").innerHTML = ""; 
+          document.getElementById("carousel").style.visibility = "hidden"; 
+          document.getElementById("carousel2").style.visibility = "hidden"; 
+
+          //document.getElementById("timeHeading").innerHTML = ""; 
           //document.getElementById("distanceFooter").innerHTML = ""; 
           
           //document.body.innerHTML = "<img src='arrow.png' alt='HTML5 Icon' id='arrow' width='1000' height='500'>"; 
@@ -69,12 +72,16 @@ $(document).ready(function() {
   				//document.body.innerHTML = "<h1>running, minimal orientation</h1>";
   				//document.body.innerHTML = "<canvas id=&quot;canvas&quot; width=&quot;1400&quot; height=&quot;500&quot; ></canvas>";  
   			} else if ((alpha > 0 && alpha <= 60) && (beta > -60 && beta <= -20)) {
-          document.getElementById("timeHeading").innerHTML = "Intermediate"; 
+          document.getElementById("carousel").style.visibility = "visible"; 
+          document.getElementById("carousel2").style.visibility = "visible"; 
+          //document.getElementById("timeHeading").innerHTML = "Intermediate"; 
   				//document.body.innerHTML = "<h2>intermediate</h2><h2 id = 'accData'></h2>"; 
   				//document.body.innerHTML = "<h1>running, transition orientation</h1>"; 
   				//document.body.innerHTML = "<h1>11:01:11</h1><img src='arrow.png' id='arrow' alt='HTML5 Icon' width='1000' height='500'><h1>2.5 mi</h1>"; 
   			} else if (((alpha > 0 && alpha <= 10) || (alpha > 260 && alpha <= 360)) && (beta > -50 && beta <= 0)) {
-          document.getElementById("timeHeading").innerHTML = "Full"; 
+          document.getElementById("carousel").style.visibility = "visible"; 
+          document.getElementById("carousel2").style.visibility = "visible"; 
+          //document.getElementById("timeHeading").innerHTML = "Full"; 
   				//document.body.innerHTML = "<h2>full screen mode: 11:01:11</h2> <img src='arrow.png' id='arrow' alt='HTML5 Icon' width='1000' height='500'><h2>2.5 mi</h2>"; 
           //document.body.innerHTML = "<h2>full</h2><h2 id = 'accData'></h2>"; 
   				//document.body.innerHTML = "<h1>full screen orientation</h1><canvas id=&quot;canvas&quot; width=&quot;1400&quot; height=&quot;500&quot; ></canvas><h2 id = &quot;accData&quot;></h2> <h1>2.5 mi</h1>"; 

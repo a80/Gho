@@ -28,6 +28,7 @@ canvas {
 .carousel {
     height: 300px;
     margin-bottom: 60px;
+    /*display: none;*/
 }
 
 .carousel .item {
