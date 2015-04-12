@@ -1,11 +1,30 @@
 //Javascript for scroll bar here!
+var scrollT = 0;
 
+var cachedWidth = 0;
+var cachedHeight = 0;
 /**
  * Sets up the scroll bar and thumb.
  */
 var setup = function(){
-	var B = drawScrollBar(600, 300, 40);
-	setUpThumb(B,50);
+	//Update cached dimensions.
+	cachedWidth = $(window).width();
+	cachedHeight = $(window).height();
+
+	var w = cachedWidth;
+	var h = cachedHeight/3;	
+	var r= h/8;
+
+	var B = drawScrollBar(w, h, r);
+	setUpThumb(B,r*1.5);
+
+	//Add listener for resizing of scroller.
+	$(window).resize(function(){
+		if ($(window).width() != cachedWidth || $(window).height() != cachedHeight){
+			//Only resize if the dimensions have changed between method calls.
+			setup();
+		}	
+	});
 }
 
 /**
@@ -25,14 +44,14 @@ var drawScrollBar = function(width, height, radius){
 	scrollFG.attr("width",width);
 	scrollFG.attr("height", height);
 
-	var paddingX = radius+5;
+	var paddingX = radius*2;
 	var paddingY = (height-radius)/2;
 	var anchorHeight = height/4;
 	var B1 = new Bezier(new Point(paddingX,paddingY), width-paddingX*2, anchorHeight);
 	var canvas = document.getElementById("scrollBG");
     var ctx = canvas.getContext('2d');
 
-    ctx.fillStyle = "#cccccc";
+    ctx.fillStyle = "#DDDDDD";
     ctx.clearRect(0,0,width, height);  
     ctx.strokeRect(0,0,width, height);  
     //ctx.fillRect(0,0, scroll.width(), scroll.height());
@@ -50,7 +69,6 @@ var drawScrollBar = function(width, height, radius){
     var P3 = (B1.p1).move(V2.normalized().perpendicular(), radius*2);
     var C2 = (B1.p1).move(V2.normalized().perpendicular(), radius);
     var B2 = new Bezier(P2, P3.x-P2.x, anchorHeight);
-    console.log(B2.toString());
     B2.drawCurve(ctx);
     //ctx.lineTo(20, 25);
     var diff = Math.PI/2-Math.atan2(V.y, V.x);
@@ -76,64 +94,101 @@ var setUpThumb = function(B, radius){
 	var scroll = $("#scrollFG");
 	var lastX = null;
 	var lastY = null;
-	drawThumb(0,0,B,radius);
+	var offsetX = 0;
+	var offsetY = 0;
+	drawThumbAtT(B, scrollT ,radius);
+
+	var thumbmove = function(e){
+		e.preventDefault();
+		var t = e;
+		if (e.originalEvent.touches != null){
+			t = e.originalEvent.touches[0];
+		}
+  		lastX = t.pageX  - scroll.offset().left;
+  		lastY = t.pageY  - scroll.offset().top;
+  		drawThumb(lastX - offsetX, lastY - offsetY, B, radius, true);
+  	};
+
+  	var thumbleave = function(e){
+  		var t = e;
+		if (e.originalEvent.touches != null){
+			t = e.originalEvent.touches[0];
+		}
+  		lastX = t.pageX  - scroll.offset().left;
+  		lastY = t.pageY  - scroll.offset().top;
+  		drawThumb(lastX, lastY, B, radius, true);
+  	};
+
+  	var thumbup = function(e){
+        scroll.off("mouseleave mousemove touchmove");
+        $(this).off("mouseup touchend");
+       	animateThumb(lastX-offsetX,lastY-offsetY,B, radius); 
+        lastX = null;
+		lastY = null;
+  	};
+
+  	scroll.off();
 	scroll.mousedown(function(e){
-		var data  = document.getElementById("scrollFG").getContext("2d").getImageData(0,0,$("#scrollBG").width(), $("#scrollBG").height()).data;
-		//$(this).css("visibility", "hidden");
+		var data  = document.getElementById("scrollFG").getContext("2d").getImageData(0,0,$("#scrollBG").width(), $("#scrollBG").height());
 		scroll.css("z-index", 2);
-		var x = e.pageX  - scroll.offset().left;
-	  	var y = e.pageY  - scroll.offset().top;
-	  	// var offsetX = e.pageX - $(this).offset().left - radius;
-	  	// var offsetY  = e.pageY - $(this).offset().top - radius;
-	  	var pixel = getPixel(data, scroll.width(), x,y);
+		var t = e;
+		if (e.originalEvent.touches != null){
+			t = e.touches[0];
+		}
+		var x = t.pageX  - scroll.offset().left;
+	  	var y = t.pageY  - scroll.offset().top;
+	  	var pixel = getPixel(data, x,y);
 	  	if (pixel.a == 0) return;
-	  	drawThumb(x, y, B, radius);
-
-		scroll.mousemove(function(e){
-			lastX = e.pageX  - scroll.offset().left;
-	  		lastY = e.pageY  - scroll.offset().top;
-	  		drawThumb(lastX, lastY, B, radius);
-	  		
-		});
-
-		scroll.mouseleave(function(e){			
-			lastX = e.pageX  - scroll.offset().left;
-	  		lastY = e.pageY  - scroll.offset().top;
-	  		drawThumb(lastX, lastY, B, radius);
-			//drawThumb(lastX, lastY, radius);
-		});
-		$(window).mouseup(function(e){
-	        var x = e.pageX  - scroll.offset().left;
-	        var y = e.pageY  - scroll.offset().top;
-	        //scroll.css("z-index", -5);
-	        scroll.off("mousemove");
-	        scroll.off("mouseleave");
-	        $(this).off("mouseup");
-	        // thumb.css("visibility", "visible");
-	        // if (lastX != null){
-	        // 	setThumb(lastX, lastY);
-	        // }
-	        // else{
-	        // 	setThumb(x-offsetX, y-offsetY);
-	        // }
-	       	animateThumb(lastX,lastY,B, radius); 
-	        lastX = null;
-			lastY = null;
-	  })
+	  	drawThumb(x, y, B, radius, true);
+		scroll.mousemove(thumbmove);
+		scroll.mouseleave(thumbleave);
+		$(window).mouseup(thumbup);
 	});
+	
+	scroll.on("touchstart", function(e){
+		var data  = document.getElementById("scrollFG").getContext("2d").getImageData(0,0,$("#scrollFG").width(), $("#scrollFG").height());
+		scroll.css("z-index", 2);
+		var t = e.originalEvent.touches[0];
+		var C = B.locationAt(scrollT);
+		lastX = t.pageX  - scroll.offset().left;
+	  	lastY = t.pageY  - scroll.offset().top;
+	  	var pixel = getPixel(data, lastX,lastY);
+	  	if (pixel.a == 0){
+	  		console.log("Empty touch");
+	  		return;
+	  	}
+	  	//Initialize offsets.
+	  	offsetX = lastX - C.x;
+	  	offsetY = lastY - C.y;
+	  	//Set up listeners for moving and releasing the thumb.
+		scroll.on("touchmove", thumbmove);
+		$(window).on("touchend", thumbup);
+		//Redraw the thumb in its current position with a highlight.
+		drawThumb(C.x, C.y, B, radius, true);
+	})
+}
+var drawSquare = function(x,y){
+	var canvas = document.getElementById("scrollFG");
+	var ctx = canvas.getContext("2d"); 
+	//ctx.clearRect(0,0, scroll.width(), scroll.height());
+	//ctx.beginPath();
+	//ctx.arc(L.x, L.y, radius, 0, 2 * Math.PI, false);
+	size = 2;
+	ctx.fillStyle = 'red';
+	ctx.fillRect(x-size/2,y-size/2, size, size);
 }
 /**
  * Gets pixel information of the foreground canvas at a specified location.
  * @param  {[Array]} pixelData [1-D array of pixel data.]
  * @param  {[int]} x         [x-coordinate of pixel location]
  * @param  {[int]} y         [y-coordinate of pixel location]
- * @return {[Pixel]}           [Pixel object if location if valid, undefined otherwise]
+ * @return {[Pixel]}           [Pixel object corresponding to RGBA value at coordinate.]
  */
-var getPixel = function(pixelData, width, x,y){
-	var i = (y * $("#scrollFG").width() + x) * 4;
-	var canvas = document.getElementById("scrollFG");
-    var ctx = canvas.getContext('2d');
-	return new Pixel(pixelData[i], pixelData[i+1], pixelData[i+2], pixelData[i+3]);
+var getPixel = function(pixelData, x,y){
+	var i = (Math.floor(y) * pixelData.width + Math.floor(x)) * 4;
+	var data = pixelData.data;
+	console.log(x + "," + y + "," + Math.floor(i));
+	return new Pixel(data[i], data[i+1], data[i+2], data[i+3]);
 }
 
 /**
@@ -144,12 +199,12 @@ var getPixel = function(pixelData, width, x,y){
  * @param  {[Bezier]} B      [Bezier curve that this thumb's motion is constrained to]
  * @param  {[float]} radius [radius of thumb]
  */
-var drawThumb = function(x, y, B, radius){
+var drawThumb = function(x, y, B, radius, isHighlighted){
 	var t = B.getT(new Point(x,y));
-	drawThumbAtT(B, t, radius);
+	drawThumbAtT(B, t, radius, isHighlighted);
 }
 
-var drawThumbAtT = function(B, t, radius){
+var drawThumbAtT = function(B, t, radius, isHighlighted){
 	var L = B.locationAt(clamp(t, 0, 1));
 	var scroll =  $("#scrollFG");
 	var canvas = document.getElementById("scrollFG");
@@ -157,11 +212,16 @@ var drawThumbAtT = function(B, t, radius){
 	ctx.clearRect(0,0, scroll.width(), scroll.height());
 	ctx.beginPath();
 	ctx.arc(L.x, L.y, radius, 0, 2 * Math.PI, false);
-	ctx.fillStyle = 'green';
+	ctx.fillStyle = '#6EBF4E';
+	if (isHighlighted){
+		ctx.fillStyle = '#AEFF8E';
+	}
 	ctx.fill();
-	ctx.lineWidth = 5;
+	ctx.lineWidth = radius*.2;
 	ctx.strokeStyle = '#003300';
 	ctx.stroke(); 
+
+	scrollT = t;
 }
 
 /**
@@ -183,10 +243,10 @@ var animateThumb = function(x, y, B, radius){
 		if (t <= 0 || t >= 1){
 			clearInterval(id);
 		}
-		drawThumbAtT(B, t, radius);
+		drawThumbAtT(B, t, radius, false);
 	}, 5);
 	t += delta;
-	drawThumbAtT(B,t, radius);
+	drawThumbAtT(B,t, radius, false);
 }
 
 /**
