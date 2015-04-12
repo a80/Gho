@@ -28,6 +28,23 @@ $(document).ready(function() {
     setup();
   });
 
+
+	//init function to draw rectangle
+	function init() {
+		var canvas = document.getElementById("canvas");
+		var context = canvas.getContext("2d");
+		context.fillStyle="red";
+		context.beginPath();
+		context.moveTo(100,410);
+		context.lineTo(1000,10);
+		context.lineTo(800,410);
+		context.closePath();
+		context.fill();
+
+    //drawing
+
+	}
+
 	onload=init;
 
 	//access gyroscope data 
@@ -45,9 +62,7 @@ $(document).ready(function() {
   			if ((alpha > 10 && alpha <= 100) && (beta > -80 && beta <= -50)) {
           document.getElementById("carousel").style.visibility = "hidden"; 
           document.getElementById("carousel2").style.visibility = "hidden"; 
-          document.getElementById("content").style.visibility = "hidden";
-          document.getElementById("arrow2").style.display = "none";  
-          document.getElementById("arrow").style.display = "block";  
+          document.getElementById("content").style.visibility = "hidden"; 
 
 
           //document.getElementById("timeHeading").innerHTML = ""; 
@@ -64,8 +79,6 @@ $(document).ready(function() {
           document.getElementById("carousel").style.visibility = "visible"; 
           document.getElementById("carousel2").style.visibility = "visible"; 
           document.getElementById("content").style.visibility = "hidden"; 
-          document.getElementById("arrow2").style.display = "none"; 
-          document.getElementById("arrow").style.display = "block";  
           //document.getElementById("timeHeading").innerHTML = "Intermediate"; 
   				//document.body.innerHTML = "<h2>intermediate</h2><h2 id = 'accData'></h2>"; 
   				//document.body.innerHTML = "<h1>running, transition orientation</h1>"; 
@@ -74,9 +87,6 @@ $(document).ready(function() {
           document.getElementById("carousel").style.visibility = "visible"; 
           document.getElementById("carousel2").style.visibility = "visible";
           document.getElementById("content").style.visibility = "visible";  
-          document.getElementById("arrow").style.display = "none";  
-          document.getElementById("arrow2").style.display = "block";  
-
           //document.getElementById("timeHeading").innerHTML = "Full"; 
   				//document.body.innerHTML = "<h2>full screen mode: 11:01:11</h2> <img src='arrow.png' id='arrow' alt='HTML5 Icon' width='1000' height='500'><h2>2.5 mi</h2>"; 
           //document.body.innerHTML = "<h2>full</h2><h2 id = 'accData'></h2>"; 
@@ -140,11 +150,7 @@ $(document).ready(function() {
 
 
     <!-- <canvas id="canvas" width="1400" height="500" ></canvas> -->
-    <!-- first large arrow for the minimal screen --> 
     <img src='arrow.png' id='arrow' alt='HTML5 Icon' width='1000' height='800'>
-
-    <!-- second small arrow for the full screen --> 
-    <img src='arrow.png' id='arrow2' alt='HTML5 Icon' width='500' height='400'>
      <!-- <h2 id = "accData"></h2> <h1>2.5 mi</h1> --> 
      
 
