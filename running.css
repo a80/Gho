@@ -45,3 +45,7 @@ canvas {
 .glyphicon-chevron-left, .glyphicon-chevron-right {
 	color: black;
 }
+
+#arrow2 {
+	display: none;
+}
