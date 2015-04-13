@@ -174,6 +174,12 @@
     <script type="text/javascript" src="runs.js"></script>
     <script type="text/javascript" src="stop.js"></script>
     <script type="text/javascript">
+      //resizing pictures of arrows
+      document.getElementById("arrow").style.width = $(window).width(); 
+      document.getElementById("arrow").style.height = $(window).width() - 50; 
+
+
+
       var url = location.href;
       var type = getParam(url, "type");
       var num = getParam(url, "run");
@@ -235,7 +241,7 @@
               $("#stopScreen").css("display", "none");
               $("#pauseScreen").css("display", "none");
 
-              
+
               document.getElementById("carousel").style.visibility = "visible"; 
               document.getElementById("carousel2").style.visibility = "visible"; 
               document.getElementById("content").style.visibility = "hidden"; 
