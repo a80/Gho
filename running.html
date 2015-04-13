@@ -175,8 +175,8 @@
     <script type="text/javascript" src="stop.js"></script>
     <script type="text/javascript">
       //resizing pictures of arrows
-      document.getElementById("arrow").style.width = $(window).width(); 
-      document.getElementById("arrow").style.height = $(window).width() - 50; 
+      document.getElementById("arrow").style.width = $(window).width().toString() + "px"; 
+      document.getElementById("arrow").style.height = ($(window).width() - 50).toString() + "px"; 
 
 
 
