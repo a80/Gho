@@ -68,3 +68,8 @@ canvas {
 	outline: none;
 }
 
+.pauseLabel {
+	font-size: 600%; 
+	text-align: left;
+	padding-left: 10%;
+}
