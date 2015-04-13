@@ -287,8 +287,9 @@
 
       function showStopScreen() {
         $("#runningScreen").css("display", "none");
-        $("#stopScreen").css("display", "block");
         $("#pauseScreen").css("display", "none");
+        $("#stopScreen").css("display", "block");
+        
 
         $("#leftButton").text("Save");
         $("#leftButton").click(function() {
@@ -307,13 +308,12 @@
 
         $('a[href="#graphDisplay"]').tab('show');
         loadGraph();
-
-        document.getElementById("console").innerHTML = "instopevent"; 
       }
 
       function showReviewScreen() {
         $("#runningScreen").css("display", "none");
         $("#stopScreen").css("display", "block");
+        $("#pauseScreen").css("display", "none");
 
         $("#leftButton").text("Back");
         $("#leftButton").click(function() {
