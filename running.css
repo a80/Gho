@@ -68,4 +68,6 @@ canvas {
 	outline: none;
 }
 
-
+.pauseLabel {
+	font-size: 150%; 
+}
