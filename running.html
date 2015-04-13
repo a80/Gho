@@ -304,12 +304,14 @@
         $("#stopScreen").css("display", "block");
         
 
-        $("#leftButton").text("Save");
+        $("#leftButton").text("Save & Exit");
+        $("#leftButton").css("width","50%");
         $("#leftButton").click(function() {
           if (type == "save") {
             var currentView = window.name.split("&");
             currentView[0] = true;
             window.name = currentView.join("&");
+            location.href = "index.html";
           }
         });
 
