@@ -280,7 +280,7 @@
       function showPauseScreen() {
         $("#runningScreen").css("display", "none");
         $("#stopScreen").css("display", "none");
-        $("#pauseScreen").css("display", "inline");
+        $("#pauseScreen").css("display", "block");
 
         console.log("showing pause screen");
       };
@@ -288,6 +288,7 @@
       function showStopScreen() {
         $("#runningScreen").css("display", "none");
         $("#stopScreen").css("display", "block");
+        $("#pauseScreen").css("display", "none");
 
         $("#leftButton").text("Save");
         $("#leftButton").click(function() {
