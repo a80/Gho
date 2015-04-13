@@ -39,7 +39,7 @@ canvas {
     background-color: white;
 };
 
-.carousel-control.right, .carousel-control.left {
+.carousel-control {
   background-image:none;
 }
 
