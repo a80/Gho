@@ -67,14 +67,16 @@
         </a>
       </div>
 
-
+      <!-- arrow for GR5 --> 
       <!-- <canvas id="canvas" width="1400" height="500" ></canvas> -->
+
       <!-- first large arrow for the minimal screen --> 
       <img src='arrow.png' id='arrow' alt='HTML5 Icon' width='300' height='250'>
 
       <!-- second small arrow for the full screen --> 
       <img src='arrow.png' id='arrow2' alt='HTML5 Icon' width='140' height='120'>
-      <h2 id = "accData"></h2> 
+      
+      <!-- <h2 id = "accData"></h2> --> 
       <!-- <h1>2.5 mi</h1> --> 
        
 
@@ -219,28 +221,6 @@
         }
       }
 
-      //resizing images with window.width(), window.height()
-      //var windowWidth = window.width(); 
-      //var height = 
-
-      // //init function to draw rectangle
-      // function init() {
-      //  var canvas = document.getElementById("canvas");
-      //  var context = canvas.getContext("2d");
-      //  context.fillStyle="red";
-      //  context.beginPath();
-      //  context.moveTo(100,410);
-      //  context.lineTo(1000,10);
-      //  context.lineTo(800,410);
-      //  context.closePath();
-      //  context.fill();
-
-     //    //drawing a smaller triangle
-
-      // }
-
-      //onload=init;
-
       //access gyroscope data 
       if(window.DeviceMotionEvent){
           window.addEventListener('deviceorientation', function(event) {
@@ -248,26 +228,21 @@
             var beta = event.beta;
             var gamma = event.gamma;
 
-            //replace HTML
-            //values for 
-
-            //print out the coordinates. 
-
-            if (/*(alpha > 10 && alpha <= 100) &&*/ (beta > -80 && beta <= -50)) {
+            if ((beta > -80 && beta <= -50)) {
               document.getElementById("carousel").style.visibility = "hidden"; 
               document.getElementById("carousel2").style.visibility = "hidden"; 
               document.getElementById("content").style.visibility = "hidden"; 
               document.getElementById("arrow2").style.display = "none"; 
               document.getElementById("arrow").style.display = "inline"; 
             } 
-            else if (/*(alpha > 0 && alpha <= 60) &&*/ (beta > -60 && beta <= -20)) {
+            else if ((beta > -60 && beta <= -20)) {
               document.getElementById("carousel").style.visibility = "visible"; 
               document.getElementById("carousel2").style.visibility = "visible"; 
               document.getElementById("content").style.visibility = "hidden"; 
               document.getElementById("arrow2").style.display = "none"; 
               document.getElementById("arrow").style.display = "inline";  
             } 
-            else if (/*((alpha > 0 && alpha <= 10) || (alpha > 260 && alpha <= 360)) &&*/ (beta > -50 && beta <= 0)) {
+            else if ((beta > -50 && beta <= 0)) {
               document.getElementById("carousel").style.visibility = "visible"; 
               document.getElementById("carousel2").style.visibility = "visible";
               document.getElementById("content").style.visibility = "visible"; 
