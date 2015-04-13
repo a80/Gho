@@ -56,3 +56,7 @@ canvas {
 #content {
 	outline: none;
 }
+
+#arrows {
+	margin: auto;
+}
