@@ -219,6 +219,10 @@
             var gamma = event.gamma;
 
             if ((beta > -80 && beta <= -50)) {
+              $("#runningScreen").css("display", "block");
+              $("#stopScreen").css("display", "none");
+              $("#pauseScreen").css("display", "none");
+
               document.getElementById("carousel").style.visibility = "hidden"; 
               document.getElementById("carousel2").style.visibility = "hidden"; 
               document.getElementById("content").style.visibility = "hidden"; 
@@ -226,6 +230,12 @@
               document.getElementById("arrow").style.display = "inline"; 
             } 
             else if ((beta > -60 && beta <= -20)) {
+
+              $("#runningScreen").css("display", "block");
+              $("#stopScreen").css("display", "none");
+              $("#pauseScreen").css("display", "none");
+
+              
               document.getElementById("carousel").style.visibility = "visible"; 
               document.getElementById("carousel2").style.visibility = "visible"; 
               document.getElementById("content").style.visibility = "hidden"; 
