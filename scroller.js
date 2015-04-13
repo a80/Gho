@@ -21,6 +21,7 @@ var setup = function(state){
 	var B = drawScrollBar(w, h, r);
 	setUpThumb(B,r*1.5);
 
+/*
 	$("#content").on("go", function(){
 		console.log("Gho!");
 	})
@@ -32,6 +33,7 @@ var setup = function(state){
 	$("#content").on("stop", function(){
 		console.log("Halt!");
 	})
+*/
 
 
 	//Add listener for resizing of scroller.
@@ -280,10 +282,20 @@ var createEvent = function(t){
 	if (eventName != currentState){
 		//Only dispatch the event when the state changes.
 		currentState = eventName;
-		var event = new Event(currentState);
+		//var event = new Event(currentState);
 		//Dispatch the event
-		$("#content").trigger(event);
+		//$("#content").trigger(event);
 		//console.log(currentState);
+
+		if (eventName == "go") {
+			showGoScreen();
+		}
+		else if (eventName == "pause") {
+			showPauseScreen();
+		}
+		else if (eventName == "stop") {
+			showStopScreen();
+		}
 	}
 	
 }

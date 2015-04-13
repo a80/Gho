@@ -73,18 +73,20 @@ if($.getHashVar('split') != null){
 
 });
 
+var stopPageInfo = "&type=save&run=0";
+
 $("#forwardbtn").on('click', function(){
 if($.getHashVar('split') != null){
 	if($("#pacebtn").hasClass("buttonselect")){
-		location.href="../running.html"+location.hash+"&pace="+$("#pace")[0].value;
+		location.href="../running.html"+location.hash+"&pace="+$("#pace")[0].value+stopPageInfo;
 	} else {
-		location.href="../running.html"+location.hash+"&pace=";
+		location.href="../running.html"+location.hash+"&pace="+stopPageInfo;
 	}
 } else if($.getHashVar('dist') != null){
 	if($("#splitbtn").hasClass("buttonselect")){
 		location.hash+="&split="+$("#split")[0].value;
 	} else {
-		location.href="../running.html"+location.hash+"&split=&pace=";
+		location.href="../running.html"+location.hash+"&split=&pace="+stopPageInfo;
 	}
 } else {
 	if($("#distancebtn").hasClass("buttonselect")){
