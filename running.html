@@ -107,8 +107,6 @@
         </a>
       </div>
 
-      <h1 id = "console">stuff</h1> 
-
       <h1 id = "pauseLabel1">27:46:11</h1>
       <h1 id = "pauseLabel2">01:03:11</h1>
       <h1 id = "pauseLabel3">+00:48:00</h1>
@@ -284,19 +282,16 @@
       }
 
       function showPauseScreen() {
-        $("#runningScreen").css("display", "block");
+        $("#runningScreen").css("display", "none");
         $("#stopScreen").css("display", "none");
 
         console.log("showing pause screen");
-
-        document.getElementById("arrow2").style.display = "none";  
+ 
         document.getElementById("pauseLabel1").style.display = "block";  
         document.getElementById("pauseLabel2").style.display = "block";  
         document.getElementById("pauseLabel3").style.display = "block";  
         document.getElementById("pauseLabel4").style.display = "block";  
         document.getElementById("pauseLabel5").style.display = "block"; 
-
-        document.getElementById("console").innerHTML =  "inpauseevent"; 
       };
 
       function showStopScreen() {
