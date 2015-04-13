@@ -43,6 +43,10 @@ canvas {
   background-image:none;
 }
 
+#leftControl, #rightControl {
+	background-image: none; 
+}
+
 .glyphicon-chevron-left, .glyphicon-chevron-right {
 	color: black;
 }
