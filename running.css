@@ -39,8 +39,11 @@ canvas {
     background-color: white;
 };
 
-.carousel-control { 
-	background-color: white; 
+.carousel-control {
+    &.left, &.right {
+        background-image: none;
+       .reset-filter(); // reset IE gradient filters
+    }
 }
 
 .glyphicon-chevron-left, .glyphicon-chevron-right {
