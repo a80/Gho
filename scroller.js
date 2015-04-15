@@ -242,9 +242,56 @@ var drawThumbAtT = function(B, t, radius, isHighlighted){
 	ctx.stroke(); 
 
 	scrollT = t;
+	drawSymbol(B, t, radius);
 	createEvent(t);
 }
 
+/**
+ * Draws a symbol corresponding to the current state of the thumb.
+ * It is a triangle if in state "go",
+ * It is two tall rectangles if in state "pause",
+ * It is a square if in state "stop".
+ * @param  {[type]} B      [description]
+ * @param  {[type]} t      [description]
+ * @param  {[type]} radius [description]
+ * @return {[type]}        [description]
+ */
+var drawSymbol = function(B, t, radius){
+	var canvas = document.getElementById("scrollFG");
+	var ctx = canvas.getContext("2d");
+	ctx.fillStyle = 'black';
+	var L = B.locationAt(clamp(t,0,1));
+	var size = radius/1.5;
+
+	if (currentState == "go"){
+		var s = Math.sqrt(Math.pow(size,2) + Math.pow(size/2, 2));
+		ctx.beginPath();
+		ctx.moveTo(L.x-size/2, L.y-s/2);
+		ctx.lineTo(L.x-size/2, L.y+s/2);
+		ctx.lineTo(L.x+size/2, L.y);
+		ctx.fill();
+
+	}
+	else if(currentState == "pause"){
+		//Draw pause symbol, which are two tall rectangles.
+		ctx.fillRect(L.x-size/2, L.y-size/2, size*.4, size);
+		ctx.fillRect(L.x-size/2+size*.6, L.y-size/2, size*.4, size);
+	}
+	else{
+		//Else, currentEvent == "stop"
+		//Draw stop symbol, which is a small square.
+		ctx.fillRect(L.x-size/2, L.y-size/2, size, size);
+	}
+
+	//Now draw the text.
+	ctx.font= radius/1.5+"px Verdana";
+	var start = B.locationAt(0);
+	ctx.fillText("Gho", start.x-radius, start.y+radius*1.5);
+	var middle = B.locationAt(.5);
+	ctx.fillText("Pause", middle.x-radius, start.y+radius*1.5);
+	var end = B.locationAt(1);
+	ctx.fillText("Stop", end.x-radius, start.y+radius*1.5);
+}
 /**
  * Animate the thumb moving towards one of the ends of the scroll bar (whichever is closer).
  * @param  {[type]} x      [description]
