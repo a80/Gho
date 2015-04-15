@@ -34,7 +34,7 @@ h2 {
         text-align: center;
       }
       .buttonspacer {
-        margin-top: 7%;
+        margin-top: 10%;
       }
 
       .buttontop {
@@ -68,3 +68,6 @@ h2 {
  }
 
 /* Your CSS here */
+#ghotext {
+  color: white;
+}
