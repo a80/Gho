@@ -284,13 +284,25 @@ var drawSymbol = function(B, t, radius){
 	}
 
 	//Now draw the text.
-	ctx.font= radius/1.5+"px Verdana";
-	var start = B.locationAt(0);
-	ctx.fillText("Gho", start.x-radius, start.y+radius*1.5);
+	var textSize = radius/1.5;
+	ctx.font= textSize+"px Verdana";
+	var start = B.locationAt(0).add(new Point(0, radius*1.8));
+	displayText("go", ctx, "Gho", start, textSize);
+	
 	var middle = B.locationAt(.5);
-	ctx.fillText("Pause", middle.x-radius, start.y+radius*1.5);
+	middle.y = start.y;
+	displayText("pause", ctx, "Pause", middle, textSize);
 	var end = B.locationAt(1);
-	ctx.fillText("Stop", end.x-radius, start.y+radius*1.5);
+	end.y = start.y;
+	displayText("stop", ctx, "Stop", end, textSize);
+}
+
+var displayText = function(state, ctx, title, position, textSize){
+	if (currentState == state) ctx.fillStyle = "#6EBF4E";
+	else ctx.fillStyle = "#DDDDDD";
+	var length = textSize*.5*title.length;
+	ctx.fillText(title, position.x - length/2, position.y);
+
 }
 /**
  * Animate the thumb moving towards one of the ends of the scroll bar (whichever is closer).
