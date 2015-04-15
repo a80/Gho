@@ -174,7 +174,9 @@ function paceDone(){
 	//$("#forwardbtn").focus();
 }
 
-$(":button").css("height", $(window).height()/12);
+$("#backbtn").css("height", $(window).height()/12);
+$("#forwardbtn").css("height", $(window).height()/12);
+//$(":button").css("height", $(window).height()/12);
 
 //var offset = $("#backbtn").offset().left;
 //$("#backbtn").css("bottom", offset);
