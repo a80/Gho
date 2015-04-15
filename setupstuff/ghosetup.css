@@ -31,11 +31,11 @@ button {
   text-align: center;
 }
 .buttonspacer {
-  margin-top: 10%;
+  margin-top: 15%;
 }
 
 .buttontop {
-  margin-top:13%;
+  margin-top:15%;
 }
 
 .buttonbottom {
@@ -60,6 +60,7 @@ input {
   text-align:right;
   margin-right:3px;
   margin-left:6px;
+  margin-bottom: 10%;
 }
 
 #forwardbtn, #backbtn {
@@ -74,3 +75,7 @@ input {
 .container {
   margin-top: 15px;
 }
+
+/*#pacebtn, #splitbtn {
+  padding-bottom: 10%;
+}*/
