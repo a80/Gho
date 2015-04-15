@@ -1,4 +1,5 @@
 html {
+  background-color: DarkGray;
          
 }
 
@@ -22,8 +23,10 @@ h2 {
 }
 
  button {
-        background-color: #99DE7E;
+      /*background-color: #99DE7E;*/
+
       }
+
       .tophalf {
         margin-top: 30%;
         margin-bottom: 30%;
